@@ -47,7 +47,7 @@ zip$pove <- round(z$pro_belowPov[match(zip$ZCTA5CE20, z$zipcode)], 3)
 zip$unemployment <- paste(z$PctUnemployed[match(zip$ZCTA5CE20, z$zipcode)], "%", sep="")
 zip$minority <- z$minority[match(zip$ZCTA5CE20, z$zipcode)]
 
-qpals <- colorQuantile("Greys", zip$pove, n = 9, na.color = "#ff2200")
+qpals <- colorQuantile("Greys", zip$pove, n = 9, na.color = "#ff2200", right = TRUE)
 labelst <- 
   paste0(
     "<b>Poverty level: </b>",
@@ -76,7 +76,7 @@ label_i <- paste0(
 	"<b>Unemployment: </b>",
     dotsf$unemployed) %>%
   lapply(htmltools::HTML)
-qpal <- colorQuantile("inferno", dotsf$math_i, n = 10)
+qpal <- colorQuantile("inferno", dotsf$math_i, n = 10, right = TRUE)
 
 mymap<-zip %>% 
   leaflet %>% 
