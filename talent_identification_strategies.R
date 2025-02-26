@@ -1,6 +1,6 @@
 # Replication data and code for talent identification strategies
 ## First specify the packages of interest
-packages = c("ggplot2", "tigris", "plotly", "leaflet")
+packages = c("ggplot2", "tigris", "plotly", "leaflet", "zctaCrosswalk")
 
 ## Now load or install&load all
 package.check <- lapply(
@@ -39,7 +39,6 @@ ggplotly(mphu)#%>%htmlwidgets::prependContent(html_fix)
 z<-read.csv("https://raw.githubusercontent.com/democratizing-data-science/talent_identification/main/ACS_FBI_IRS_ZCTA_county_bank.csv")
 z$minority <- paste(round(z$BlackNH + z$NativeNH + z$PopHisp, 3), "%", sep="")
 zip<-zctas() #all PHUDCFILY
-library(zctaCrosswalk)
 m<-get_zctas_by_state("Georgia")
 zip$keep <- zip$ZCTA5CE20%in%m
 zip<-zip[zip$keep==TRUE,]
@@ -79,7 +78,6 @@ label_i <- paste0(
   lapply(htmltools::HTML)
 qpal <- colorQuantile("inferno", dotsf$math_i, n = 10)
 
-library(leaflet)
 mymap<-zip %>% 
   leaflet %>% 
   # add base map
